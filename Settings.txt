@@ -1,0 +1,36 @@
+################################################################################
+# Portfolio settings.
+
+# Target proportions. These should sum to 1. This is used for rebalancing and
+# for depositing purposes.
+Stock [float]:                                   .7
+Bond [float]:                                    .25
+Cash [float]:                                    .05
+
+# How much $ do will you initially have in each asset class? (in dollars)
+Initial Stock Balance [float]:                   10000.
+Initial Bond Balance [float]:                    1000.
+Initial Cash Balance [float]:                    2000.
+
+# How much $ do you plan to add to the portfolio each quarter? The target
+# proportions specify what proportion of this $ is added to each asset class.
+Quarterly Deposit Rate [float]:                  7000.
+
+# How much of your stock dividends/bond interest do you plan to reinvest?
+# Everything that you don't reinvest becomes cash.
+Dividend Reinvestment Rate [float]:              .9
+Interest Reinvestment Rate [float]:              .9
+
+# How frequently do you want to rebalance your asset classes? (so that the
+# proportion of the portfolio in each asset classes matches the targets)
+Quarters Between Rebalancing [int]:              4
+
+
+
+################################################################################
+# Data Settings
+
+# Where is the data on past returns? These should be the names of files in the
+# Data directory.
+Past Stock Returns File [string]:                 VTSAX.csv
+Past Bond Returns File [string]:                  VTSAX.csv

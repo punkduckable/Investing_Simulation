@@ -1,7 +1,7 @@
 #ifndef READER_HXX
 #define READER_HXX
 
-#include "Returns.hxx"
+#include "../Returns.hxx"
 
 namespace Reader {
 
