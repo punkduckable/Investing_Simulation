@@ -34,13 +34,14 @@ class Portfolio {
     // This basically specifies how frequently we rebalance the portfolio so
     // that the % of the portfolio's $ in each asset class matches the targets.
     unsigned Quarters_Between_Rebalancing;
+    unsigned Quarters_Since_Rebalancing = 0;
   public:
     Portfolio(const double   Target_Stock,
               const double   Target_Bond,
               const double   Target_Cash,
               const double   Initial_Balance_Stock,
               const double   Initial_Balance_Bond,
-              const double   Initial_Balnace_Cash,
+              const double   Initial_Balance_Cash,
               const double   Quarterly_Deposit_Rate,
               const double   Dividend_Reinvestment_Rate,
               const double   Interest_Reinvestment_Rate,
@@ -51,7 +52,7 @@ class Portfolio {
               Target_Cash   (Target_Cash),
               Balance_Stock (Initial_Balance_Stock),
               Balance_Bond  (Initial_Balance_Bond),
-              Balance_Cash  (Initial_Balnace_Cash),
+              Balance_Cash  (Initial_Balance_Cash),
               Quarterly_Deposit_Rate      (Quarterly_Deposit_Rate),
               Dividend_Reinvestment_Rate  (Dividend_Reinvestment_Rate),
               Interest_Reinvestment_Rate  (Interest_Reinvestment_Rate),
@@ -75,6 +76,9 @@ class Portfolio {
       assert((*this).Interest_Reinvestment_Rate >= 0.);
       assert((*this).Dividend_Reinvestment_Rate <= 1.);
       assert((*this).Interest_Reinvestment_Rate <= 1.);
+
+      // Check that Quarters Between Rebalancing is positive.
+      assert((*this).Quarters_Between_Rebalancing > 0);
     } // Portfolio(const double   Target_Stock,...
 
 
@@ -83,7 +87,9 @@ class Portfolio {
       return (*this).Quarters_Between_Rebalancing;
     } // unsigned Get_Quarters_Between_Rebalancing(void) {
 
-
+    double Get_Balance_Stock(void) const { return (*this).Balance_Stock; }
+    double Get_Balance_Bond(void)  const { return (*this).Balance_Bond;  }
+    double Get_Balance_Cash(void)  const { return (*this).Balance_Cash;  }
 
     double Get_Balance(void) const {
       return (*this).Balance_Stock + (*this).Balance_Bond + (*this).Balance_Cash;
@@ -95,26 +101,26 @@ class Portfolio {
                 const Returns::Quarterly Bond) {
       // Update stock balance. All dividends that aren't reinvested become cash.
       (*this).Balance_Stock *= (1. + Stock.Capital_Gains);
-      (*this).Balance_Stock += ((*this).Balance_Stock*
-                                Stock.Current_Income*
-                                (*this).Dividend_Reinvestment_Rate);
-      (*this).Balance_Cash +=  ((*this).Balance_Stock*
-                                Stock.Current_Income*
-                                (1. - (*this).Dividend_Reinvestment_Rate));
+      const double Dividends = (*this).Balance_Stock*Stock.Current_Income;
+      (*this).Balance_Stock += Dividends*(*this).Dividend_Reinvestment_Rate;
+      (*this).Balance_Cash +=  Dividends*(1. - (*this).Dividend_Reinvestment_Rate);
 
       // Update bond balance. All interest that aren't reinvested become cash.
       (*this).Balance_Bond *= (1. + Bond.Capital_Gains);
-      (*this).Balance_Bond += ((*this).Balance_Bond*
-                               Bond.Current_Income*
-                               (*this).Interest_Reinvestment_Rate);
-      (*this).Balance_Cash += ((*this).Balance_Bond*
-                               Bond.Current_Income*
-                               (1. - (*this).Interest_Reinvestment_Rate));
+      const double Interest = (*this).Balance_Bond*Bond.Current_Income;
+      (*this).Balance_Bond += Interest*(*this).Interest_Reinvestment_Rate;
+      (*this).Balance_Cash += Interest*(1. - (*this).Interest_Reinvestment_Rate);
 
       // Now update based on quarterly deposit rate.
       (*this).Balance_Stock += (*this).Quarterly_Deposit_Rate*(*this).Target_Stock;
       (*this).Balance_Bond  += (*this).Quarterly_Deposit_Rate*(*this).Target_Bond;
       (*this).Balance_Cash  += (*this).Quarterly_Deposit_Rate*(*this).Target_Cash;
+
+      // Check if we need to rebalance. If so, then do that now.
+      (*this).Quarters_Since_Rebalancing++;
+      if((*this).Quarters_Since_Rebalancing == (*this).Quarters_Between_Rebalancing) {
+        (*this).Rebalance();
+      } // if((*this).Quarters_Since_Rebalancing == (*this).Quarters_Between_Rebalancing) {
     } // void Update(Returns::Quarterly Stock,
 
 

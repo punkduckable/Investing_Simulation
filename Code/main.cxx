@@ -7,11 +7,14 @@
 #include "Simulate.hxx"
 
 #include "Reader.cxx"
+#include "Simulate.cxx"
+
 
 
 int main(void) {
   std::vector<Returns::Quarterly> Past_Returns = Reader::Read_Past_Returns("../Data/VTSAX.csv");
 
+  /*
   int Length = (int)Past_Returns.size();
   std::printf("Number of past returns = %d\n", Length);
 
@@ -20,6 +23,7 @@ int main(void) {
                 Past_Returns[i].Capital_Gains,
                 Past_Returns[i].Current_Income);
   } // for(int i = 0; i < 10; i++) {
+  */
 
   Portfolio My_Portfolio{ .7,
                           .25,
@@ -32,13 +36,19 @@ int main(void) {
                           .80,
                           4};
 
-  std::printf("Quarters_Between_Rebalancing = %d\n", My_Portfolio.Get_Quarters_Between_Rebalancing());
+  //std::printf("Quarters_Between_Rebalancing = %d\n", My_Portfolio.Get_Quarters_Between_Rebalancing());
   My_Portfolio.Print_Balances();
-  My_Portfolio.Update(Past_Returns[0], Past_Returns[1]);
+  //My_Portfolio.Update(Past_Returns[0], Past_Returns[1]);
+  //My_Portfolio.Print_Balances();
+  //My_Portfolio.Rebalance();
+  //My_Portfolio.Print_Balances();
+  //My_Portfolio.Print();
+
+  Simulate::Quarters(40,
+                     My_Portfolio,
+                     Past_Returns,
+                     Past_Returns);
   My_Portfolio.Print_Balances();
-  My_Portfolio.Rebalance();
-  My_Portfolio.Print_Balances();
-  My_Portfolio.Print();
 
   return 0;
 } // int main(void) {

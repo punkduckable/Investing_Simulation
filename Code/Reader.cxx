@@ -26,11 +26,11 @@ std::vector<Returns::Quarterly> Reader::Read_Past_Returns(const char * File_Path
   FILE* File = std::fopen(File_Path, "r");
 
   // Initialize some buffers. We'll use these a few times.
-  const int Buffer_Length = 256;
+  const unsigned Buffer_Length = 256;
   char Buffer[Buffer_Length];
 
   // Now, figure out how many lines are in this file.
-  int Num_Lines = 0;
+  unsigned Num_Lines = 0;
   while(true) {
     if(std::fgets(Buffer, Buffer_Length, File) == NULL) { break; }
     else { Num_Lines++; }
@@ -48,7 +48,7 @@ std::vector<Returns::Quarterly> Reader::Read_Past_Returns(const char * File_Path
   std::fgets(Buffer, Buffer_Length, File);
 
   // Read the Lines, one at a time.
-  for(int i = 0; i < Num_Lines - 1; i++) {
+  for(unsigned i = 0; i < Num_Lines - 1; i++) {
     // Read the next line (which should exist... assuming we read the number
     // of lines correctly)
     std::fgets(Buffer, Buffer_Length, File);
