@@ -11,16 +11,18 @@ void Settings::Print(void) {
   printf("Target Stock =                    %lf\n", Target_Stock);
   printf("Target Bond  =                    %lf\n", Target_Bond);
   printf("Target Cash  =                    %lf\n", Target_Cash);
-
   printf("Initial Balance Stock =           %lf\n", Initial_Balance_Stock);
   printf("Initial Balance Bond  =           %lf\n", Initial_Balance_Bond);
   printf("Initial Balance Cash  =           %lf\n", Initial_Balance_Cash);
-
   printf("Quarterly Deposit Rate =          %lf\n", Quarterly_Deposit_Rate);
   printf("Dividend Reinvestement Rate =     %lf\n", Dividend_Reinvestment_Rate);
   printf("Interest Reinvestement Rate =     %lf\n", Interest_Reinvestment_Rate);
+  printf("Quarters Between Rebalancing =    %u\n",  Quarters_Between_Rebalancing);
 
-  printf("Quarters Between Rebalancing =    %d\n",  Quarters_Between_Rebalancing);
+  // Simulation Settings
+  printf("Number of Quarters =              %u\n", Num_Quarters);
+  printf("Number of Simulations =           %u\n", Num_Simulations);
+
 
   // Data settings.
   printf("Past Stock Returns File =         %s\n",  Past_Stock_Returns_File.c_str());
@@ -79,7 +81,18 @@ void Settings::Parser::Read(void) {
 
 
   strBuf = IO::read_line_after(File, "Quarters Between Rebalancing [int]:", false);
-  sscanf(strBuf.c_str()," %d \n", &Settings::Quarters_Between_Rebalancing);
+  sscanf(strBuf.c_str()," %u \n", &Settings::Quarters_Between_Rebalancing);
+
+
+
+  //////////////////////////////////////////////////////////////////////////////
+  // Data Settings
+
+  strBuf = IO::read_line_after(File, "Number of Quarters [int]:", false);
+  sscanf(strBuf.c_str()," %u \n", &Settings::Num_Quarters);
+
+  strBuf = IO::read_line_after(File, "Number of Simulations [int]:", false);
+  sscanf(strBuf.c_str()," %u \n", &Settings::Num_Simulations);
 
 
 

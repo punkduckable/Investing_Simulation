@@ -16,6 +16,10 @@ namespace Settings {
   double   Interest_Reinvestment_Rate;
   unsigned Quarters_Between_Rebalancing;
 
+  // Simulation Settings
+  unsigned Num_Quarters;
+  unsigned Num_Simulations;
+
   // Data settings.
   std::string Past_Stock_Returns_File;
   std::string Past_Bond_Returns_File;

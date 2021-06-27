@@ -1,18 +1,3 @@
-- Read in capital gains, dividend yield (both as %) for each month of data. This
-is what should be stored in an object. Once I have this data, I can randomly
-generate new months (with divided yields/capital gains).
-
-- Write portfolio class. Should contain a stock, bond, and cash balance, as well
-as stock %, bond %, deposit rate ($ put in for each month), and rebalancing
-frequency (1, 2, 3, 4, 6, or 12 times per year). Also reinvestment rate (for
-dividends)
-
-- Write code to simulate a year. This will randomly sample 12 months. Inputs
-should be a portfolio object. It will simulate a year of the stock market by
-randomly sampling input data. Rebalance the portfolio's stock/bond balance
-based on the returns, rebalance frequencies, reinvestment rate, and stock/bond
-proportions. $ that isn't reinvested gets put into cash balance.
-
-- Write a settings file + reader. There should be settings for time horizon,
-initial balance, bond/stock proportion, rebalance frequency, deposit rate, and
-reinvestment proportion. 
+- Write code to run a lot of simulations. Keep track of the outcome (final
+balance) of each simulation, then compute and report statistics on these
+outcomes (max, min, mean, median, sd, etc.)

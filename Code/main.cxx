@@ -59,7 +59,7 @@ int main(void) {
   printf("\n");
 
   // Simualate future quarters using past data!
-  Simulate::Quarters(40,
+  Simulate::Quarters(Settings::Num_Quarters,
                      My_Portfolio,
                      Past_Stock_Returns,
                      Past_Bond_Returns);

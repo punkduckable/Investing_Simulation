@@ -28,6 +28,17 @@ Quarters Between Rebalancing [int]:              4
 
 
 ################################################################################
+# Simulation settings.
+
+# How many quarters do you want to simulate for (the investment time horizon)?
+Number of Quarters [int]:                        40
+
+# How many simulations do you want to run? (more gives better statistics)
+Number of Simulations [int]:                     1000000
+
+
+
+################################################################################
 # Data Settings
 
 # Where is the data on past returns? These should be the names of files in the
