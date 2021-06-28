@@ -83,6 +83,9 @@ class Portfolio {
 
 
 
+    ////////////////////////////////////////////////////////////////////////////
+    // Getters
+
     unsigned Get_Quarters_Between_Rebalancing(void) const {
       return (*this).Quarters_Between_Rebalancing;
     } // unsigned Get_Quarters_Between_Rebalancing(void) {
@@ -96,6 +99,23 @@ class Portfolio {
     } // double Get_Balance(void) const {
 
 
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Setters
+
+    void Set_Balance_Stock(const double Bal_In)  { (*this).Balance_Stock = Bal_In; }
+    void Set_Balance_Bond( const double Bal_In ) { (*this).Balance_Bond  = Bal_In; }
+    void Set_Balance_Cash( const double Bal_In ) { (*this).Balance_Cash  = Bal_In; }
+
+    void Set_Quarters_Since_Rebalancing(const unsigned Quarters_Since_In) {
+      (*this).Quarters_Since_Rebalancing = Quarters_Since_Rebalancing;
+    } // void Set_Quarters_Since_Rebalancing(const unsigned Quarters_Since_In) {
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Other methods
 
     void Update(const Returns::Quarterly Stock,
                 const Returns::Quarterly Bond) {
