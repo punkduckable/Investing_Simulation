@@ -34,7 +34,7 @@ Quarters Between Rebalancing [int]:              4
 Number of Quarters [int]:                        40
 
 # How many simulations do you want to run? (more gives better statistics)
-Number of Simulations [int]:                     1000000
+Number of Simulations [int]:                     10000000
 
 
 
