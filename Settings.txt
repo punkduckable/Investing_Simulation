@@ -3,14 +3,14 @@
 
 # Target proportions. These should sum to 1. This is used for rebalancing and
 # for depositing purposes.
-Stock [float]:                                   .7
-Bond [float]:                                    .25
-Cash [float]:                                    .05
+Stock [float]:                                   .67
+Bond [float]:                                    .27
+Cash [float]:                                    .06
 
 # How much $ do will you initially have in each asset class? (in dollars)
-Initial Stock Balance [float]:                   10000.
-Initial Bond Balance [float]:                    1000.
-Initial Cash Balance [float]:                    2000.
+Initial Stock Balance [float]:                   30000.
+Initial Bond Balance [float]:                    10000.
+Initial Cash Balance [float]:                    5000.
 
 # How much $ do you plan to add to the portfolio each quarter? The target
 # proportions specify what proportion of this $ is added to each asset class.
@@ -18,12 +18,12 @@ Quarterly Deposit Rate [float]:                  7000.
 
 # How much of your stock dividends/bond interest do you plan to reinvest?
 # Everything that you don't reinvest becomes cash.
-Dividend Reinvestment Rate [float]:              .9
-Interest Reinvestment Rate [float]:              .9
+Dividend Reinvestment Rate [float]:              1.0
+Interest Reinvestment Rate [float]:              1.0
 
 # How frequently do you want to rebalance your asset classes? (so that the
 # proportion of the portfolio in each asset classes matches the targets)
-Quarters Between Rebalancing [int]:              4
+Quarters Between Rebalancing [int]:              2
 
 
 
@@ -31,7 +31,7 @@ Quarters Between Rebalancing [int]:              4
 # Simulation settings.
 
 # How many quarters do you want to simulate for (the investment time horizon)?
-Number of Quarters [int]:                        40
+Number of Quarters [int]:                        80
 
 # How many simulations do you want to run? (more gives better statistics)
 Number of Simulations [int]:                     10000000

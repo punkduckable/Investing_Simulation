@@ -43,7 +43,7 @@ std::vector<double> Statistics::Standard_Deviation(
   //        (sum_{i = 1}^{N} (x_n - mu)^2 / N)^(1/2)
   for(unsigned i = 0; i < List_Length; i++) {
     for(unsigned j = 0; j < Num_Lists; j++) {
-      Standard_Deviations[j] += Lists[i*Num_Lists + j]*Lists[i*Num_Lists + j];
+      Standard_Deviations[j] += (Lists[i*Num_Lists + j] - Means[j])*(Lists[i*Num_Lists + j] - Means[j]);
     } // for(unsigned j = 0; j < Num_Lists; j++) {
   } // for(unsigned i = 0; i < List_Length; i++) {
 

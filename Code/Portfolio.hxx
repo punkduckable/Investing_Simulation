@@ -103,12 +103,12 @@ class Portfolio {
     ////////////////////////////////////////////////////////////////////////////
     // Setters
 
-    void Set_Balance_Stock(const double Bal_In)  { (*this).Balance_Stock = Bal_In; }
-    void Set_Balance_Bond( const double Bal_In ) { (*this).Balance_Bond  = Bal_In; }
-    void Set_Balance_Cash( const double Bal_In ) { (*this).Balance_Cash  = Bal_In; }
+    void Set_Balance_Stock(const double Bal_In) { (*this).Balance_Stock = Bal_In; }
+    void Set_Balance_Bond (const double Bal_In) { (*this).Balance_Bond  = Bal_In; }
+    void Set_Balance_Cash (const double Bal_In) { (*this).Balance_Cash  = Bal_In; }
 
     void Set_Quarters_Since_Rebalancing(const unsigned Quarters_Since_In) {
-      (*this).Quarters_Since_Rebalancing = Quarters_Since_Rebalancing;
+      (*this).Quarters_Since_Rebalancing = Quarters_Since_In;
     } // void Set_Quarters_Since_Rebalancing(const unsigned Quarters_Since_In) {
 
 
@@ -121,14 +121,14 @@ class Portfolio {
                 const Returns::Quarterly Bond) {
       // Update stock balance. All dividends that aren't reinvested become cash.
       (*this).Balance_Stock *= (1. + Stock.Capital_Gains);
-      const double Dividends = (*this).Balance_Stock*Stock.Current_Income;
-      (*this).Balance_Stock += Dividends*(*this).Dividend_Reinvestment_Rate;
-      (*this).Balance_Cash +=  Dividends*(1. - (*this).Dividend_Reinvestment_Rate);
+      const double Dividends = ((*this).Balance_Stock)*(Stock.Current_Income);
+      (*this).Balance_Stock += Dividends*((*this).Dividend_Reinvestment_Rate);
+      (*this).Balance_Cash  += Dividends*(1. - (*this).Dividend_Reinvestment_Rate);
 
       // Update bond balance. All interest that aren't reinvested become cash.
       (*this).Balance_Bond *= (1. + Bond.Capital_Gains);
-      const double Interest = (*this).Balance_Bond*Bond.Current_Income;
-      (*this).Balance_Bond += Interest*(*this).Interest_Reinvestment_Rate;
+      const double Interest = ((*this).Balance_Bond)*(Bond.Current_Income);
+      (*this).Balance_Bond += Interest*((*this).Interest_Reinvestment_Rate);
       (*this).Balance_Cash += Interest*(1. - (*this).Interest_Reinvestment_Rate);
 
       // Now update based on quarterly deposit rate.
